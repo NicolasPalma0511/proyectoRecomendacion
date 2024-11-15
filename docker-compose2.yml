@@ -1,0 +1,24 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ./app
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+  frontend:
+    build:
+      context: ./react/MiProyecto
+    env_file:
+      - ./react/MiProyecto/.env
+    ports:
+      - "3000:3000"
+      - "19002:19002"   
+      - "8081:8081"      
+    depends_on:
+      - web

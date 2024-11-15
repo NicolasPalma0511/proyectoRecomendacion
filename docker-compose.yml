@@ -1,0 +1,50 @@
+version: '3'
+services:
+  web:
+    image: myapp_web  
+    ports:
+      - "5000:5000"
+    deploy:
+      replicas: 3  
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
+    networks:
+      - my_network
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "256M"
+    networks:
+      - my_network
+
+  frontend:
+    image: myapp_frontend 
+    ports:
+      - "3000:3000"
+      - "19002:19002"
+      - "8081:8081"
+    deploy:
+      replicas: 2  
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
+    networks:
+      - my_network
+    depends_on:
+      - web
+
+networks:
+  my_network:
+    driver: overlay

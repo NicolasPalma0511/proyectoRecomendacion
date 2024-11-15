@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recomendador de Partituras</title>
+</head>
+<body>
+    <h1>Recomendador de Partituras para Guitarra</h1>
+    
+    <form method="post">
+        <label for="cancion_id">Selecciona una canción para obtener recomendaciones:</label>
+        <select name="cancion_id" id="cancion_id">
+            {% for cancion in canciones %}
+                <option value="{{ cancion['id'] }}">{{ cancion['nombre'] }} - {{ cancion['autor'] }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Obtener Recomendaciones</button>
+    </form>
+
+    {% if recomendaciones %}
+        <h2>Recomendaciones:</h2>
+        <ul>
+            {% for rec in recomendaciones %}
+                <li>{{ rec['nombre'] }} - {{ rec['autor'] }} ({{ rec['género'] }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
