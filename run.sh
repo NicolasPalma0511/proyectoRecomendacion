@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables para los nodos
-WORKER_NODES=("IP_NODO_TRABAJADOR_1" "IP_NODO_TRABAJADOR_2")
+WORKER_NODES=("ec2-34-203-246-128.compute-1.amazonaws.com" "ec2-44-211-192-37.compute-1.amazonaws.com")
 
 # Inicializar Docker Swarm
 if ! docker info | grep -q 'Swarm: active'; then
